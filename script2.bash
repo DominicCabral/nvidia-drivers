@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
-# # kubelet can't use the GPU without nvidia-uvm
-# if sudo modprobe nvidia-uvm ; then
-# 		sudo mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0 || true
-# 			nvidia-smi
+# kubelet can't use the GPU without nvidia-uvm
+if sudo modprobe nvidia-uvm ; then
+	sudo mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0 || true
+	nvidia-smi
 
-# 			    echo 'GPU software already installed; exiting'
-# 			        exit 0
-# 			fi
+    echo 'GPU software already installed; exiting'
+    exit 0
+fi
 
 # Drivers not available, install them
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
