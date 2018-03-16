@@ -1,5 +1,13 @@
 #!/bin/bash -e
 
+#Remove it!
+apt-get update
+apt-get upgrade -y
+apt-get dist-upgrade -y
+apt-get remove -y nvidia*
+apt-get autoremove -y
+apt-get install -y dkms build-essential linux-headers-generic
+
 # kubelet can't use the GPU without nvidia-uvm
 if sudo modprobe nvidia-uvm ; then
 	sudo mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0 || true
